@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ASPProject.Login" %>
+﻿
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-
+  <asp:Content ID="mainContent" ContentPlaceHolderID="HeadPlaceholder" runat="server">
     <title></title>
 </head>
 <body>
@@ -25,10 +25,7 @@
         <asp:Button ID="Lgoin" runat="server" Text="Login" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button1" runat="server" Text="Signup" />
-       <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary">Left</button>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
+      
 </div>
         <br />
         <br />
@@ -46,7 +43,7 @@
         <br />
         <br />
     </form>
-<script src="Content/bootstrap.css”></script>
 
 </body>
+
 </html>
