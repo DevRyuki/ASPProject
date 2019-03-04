@@ -25,14 +25,18 @@ namespace ASPProject
         {
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
             connect.Open();
-            SqlCommand INSERT = new SqlCommand("select User,Password where User = " + UserName.Text +" and Password =" + Password.Text, connect);
+            string query = "SELECT * from Users where User='" + UserName.Text + "' AND Password='" + Password.Text + "'";
+            SqlCommand INSERT = new SqlCommand(query, connect);
+
             int count = Convert.ToInt32(INSERT.ExecuteScalar());
             if (count == 1)
             {
-                Response.Redirect("Signup.aspx");
+                Response.Write("Load not found ");
             }
             else
-            { }
+            {   
+                Response.Write("F");
+            }
             connect.Close();
 
 

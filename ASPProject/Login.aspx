@@ -18,4 +18,5 @@
 &nbsp;&nbsp;
         <asp:Button ID="Signup" runat="server" OnClick="Signup_Click" Text="Signup" />
     </p>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Login %>" SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
 </form>

@@ -20,11 +20,8 @@ namespace ASPProject
         {
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
             connect.Open();
-
-            int I = 1;
-            I++;
-            SqlCommand INSERT = new SqlCommand("insert into Users (ID,User,Password,Email,Phone) VALUES (@ID,@User,@Password,@Email,@Phone)", connect);
-            INSERT.Parameters.AddWithValue("ID",I.ToString() );
+            SqlCommand INSERT = new SqlCommand("insert into Users (ID,User,Password,Phone,Email) values (@ID,@User,@Password,@Phone,@Email)", connect);
+            INSERT.Parameters.AddWithValue("ID","OOF" );
             INSERT.Parameters.AddWithValue("User", UserName.Text);
             INSERT.Parameters.AddWithValue("Password", Password.Text);
             INSERT.Parameters.AddWithValue("Email", Email.Text);
