@@ -22,13 +22,11 @@ namespace ASPProject
         }
 
         protected void Log_Click(object sender, EventArgs e)
-        {
-            Response.Write(UserName.Text );
-            Response.Write(Password.Text);
+        { 
  
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
             connect.Open();
-            string query = "SELECT COUNT(*) from Users where User='" + UserName.Text + "' AND Password='" + Password.Text + "'";
+            string query = "SELECT COUNT(*) from Users where Usr='" + UserName.Text + "' AND Password='" + Password.Text + "'";
             SqlCommand Login = new SqlCommand(query, connect);
 
             int count = Convert.ToInt32(Login.ExecuteScalar());

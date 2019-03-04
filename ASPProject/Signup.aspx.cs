@@ -18,15 +18,15 @@ namespace ASPProject
 
         protected void Signup_Click(object sender, EventArgs e)
         {
+            Guid id = Guid.NewGuid();
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
             connect.Open();
-            SqlCommand INSERT = new SqlCommand("insert into Users (ID,User,Password,Phone,Email) values (@ID,@User,@Password,@Phone,@Email)", connect);
-            INSERT.Parameters.AddWithValue("ID","OOF" );
-            INSERT.Parameters.AddWithValue("User", UserName.Text);
-            INSERT.Parameters.AddWithValue("Password", Password.Text);
+            SqlCommand INSERT = new SqlCommand("insert into Users (ID,Usr,Password,Phone,Email) values (@ID,@Usr,@Password,@Phone,@Email)", connect);
+            INSERT.Parameters.AddWithValue("ID",id );
+            INSERT.Parameters.AddWithValue("Usr", UserName.Text);
+           INSERT.Parameters.AddWithValue("Password", Password.Text);
             INSERT.Parameters.AddWithValue("Email", Email.Text);
             INSERT.Parameters.AddWithValue("Phone", PhoneNum.Text);
-
             INSERT.ExecuteNonQuery();
             Response.Write("Insert Sucessful!");
 
