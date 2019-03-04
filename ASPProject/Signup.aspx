@@ -27,7 +27,7 @@
             <asp:TextBox ID="PhoneNum" runat="server"></asp:TextBox>
             <br />
             <br />
-            <asp:Button ID="Signup" runat="server" Text="Button" />
+            <asp:Button ID="Signup" runat="server" Text="Signup" OnClick="Signup_Click" />
             <br />
             <br />
             <br />
@@ -35,6 +35,7 @@
             <br />
             <br />
         </div>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Login %>" SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
     </form>
 </body>
 </html>
