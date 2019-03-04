@@ -23,19 +23,23 @@ namespace ASPProject
 
         protected void Log_Click(object sender, EventArgs e)
         {
+            Response.Write(UserName.Text );
+            Response.Write(Password.Text);
+ 
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
             connect.Open();
-            string query = "SELECT * from Users where User='" + UserName.Text + "' AND Password='" + Password.Text + "'";
-            SqlCommand INSERT = new SqlCommand(query, connect);
+            string query = "SELECT COUNT(*) from Users where User='" + UserName.Text + "' AND Password='" + Password.Text + "'";
+            SqlCommand Login = new SqlCommand(query, connect);
 
-            int count = Convert.ToInt32(INSERT.ExecuteScalar());
+            int count = Convert.ToInt32(Login.ExecuteScalar());
+            
             if (count == 1)
             {
-                Response.Write("Load not found ");
+                Status.Text = "Complete";
             }
             else
-            {   
-                Response.Write("F");
+            {
+                Status.Text = "F";
             }
             connect.Close();
 

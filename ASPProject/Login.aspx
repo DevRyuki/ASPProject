@@ -18,5 +18,8 @@
 &nbsp;&nbsp;
         <asp:Button ID="Signup" runat="server" OnClick="Signup_Click" Text="Signup" />
     </p>
+    <p>
+        <asp:Label ID="Status" runat="server" Text="Label"></asp:Label>
+    </p>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Login %>" SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
 </form>
