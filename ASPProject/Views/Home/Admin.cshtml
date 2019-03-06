@@ -4,23 +4,13 @@
     Layout = null;
     bool failed = false;
 
-
     SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
+
     connect.Open();
-    string query = "SELECT * from Users";
-    SqlCommand Users = new SqlCommand(query, connect);
-    if (true)
-    {
-
-    }
 
 
-    else
-    {
-        failed = true;
-    }
-    connect.Close();
 }
+
 
 <!DOCTYPE html>
 
@@ -52,14 +42,37 @@
     <div>
         <p>
             @{
+                
+                string query = "SELECT * from Users";
+                SqlCommand Users = new SqlCommand(query, connect);
+
 
                 
 
-                if (failed)
+
+                connect.Close();
+
+                if (IsPost)
                 {
-                    @String.Format("Connetion to Database failed.")
+                    if (Request.Form["txtUserID"] != null)
+                    {
+                        string query = "SELECT * from Users where ID = " + txtUserID;
+                        SqlCommand Users = new SqlCommand(query, connect);
+
+
+
+                        connect.Close();
+
+                    }
+
+
+                    if (failed)
+                    {
+                        @String.Format("Connetion to Database failed.")
+                    }
                 }
             }
+
         </p>
 
     </div>
