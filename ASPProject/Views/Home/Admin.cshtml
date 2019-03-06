@@ -1,10 +1,25 @@
-﻿
+﻿@using System.Configuration;
+@using System.Data.SqlClient;
 @{
     Layout = null;
+    bool failed = false;
 
-    
-    
 
+    SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
+    connect.Open();
+    string query = "SELECT * from Users";
+    SqlCommand Users = new SqlCommand(query, connect);
+    if (true)
+    {
+
+    }
+
+
+    else
+    {
+        failed = true;
+    }
+    connect.Close();
 }
 
 <!DOCTYPE html>
@@ -15,7 +30,40 @@
     <title>Admin</title>
 </head>
 <body>
-    <div> 
+    <form id="form1" method="post">
+        <p>
+            <label for="txtUserID">User ID:</label>
+            <input id="txtUserID" type="text" /><br />
+            <label for="txtUserName">Username:</label>
+            <input id="txtUserName" type="text" /><br />
+            <label for="txtEmail">Email:</label>
+            <input id="txtEmail" type="text" /><br />
+            <label for="txtPhone">Phone #:</label>
+            <input id="txtPhone" type="text" /><br />
+        </p>
+
+        <p>
+            <input id="btnLoad" type="button" value="Load" />
+            <input id="btnInsert" type="button" value="Insert" />
+            <input id="btnUpdate" type="button" value="Update" />
+            <input id="btnDelete" type="button" value="Delete" />
+        </p>
+    </form>
+    <div>
+        <p>
+            @{
+
+                
+
+                if (failed)
+                {
+                    @String.Format("Connetion to Database failed.")
+                }
+            }
+        </p>
+
     </div>
+
+
 </body>
 </html>
