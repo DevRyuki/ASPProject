@@ -21,14 +21,14 @@
 
 			if (count == 1)
 			{
-
+				HttpContext.Current.Session["Username"] = Request.Form["UserName"];
 				if (Request.Form["UserName"] == "admin")
 				{
 					Response.Redirect("~/Home/Admin");
 				}
 				else
 				{
-					Response.Redirect("/Home/Index");
+					Response.Redirect("~/Home/Index");
 				}
 			}
 			else
