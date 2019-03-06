@@ -1,0 +1,63 @@
+﻿@using System.Configuration;
+@using System.Data.SqlClient;
+@{
+    Layout = null;
+    bool failed = false;
+
+
+    if (IsPost)
+    {
+        if (Request.Form["Signup"] != null)
+        {
+
+            Guid id = Guid.NewGuid();
+            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
+            connect.Open();
+            SqlCommand INSERT = new SqlCommand("insert into Users (ID,Usr,Password,Phone,Email) values (@ID,@Usr,@Password,@Phone,@Email)", connect);
+            INSERT.Parameters.AddWithValue("ID", id);
+            INSERT.Parameters.AddWithValue("Usr", Request.Form["UserName"]);
+            INSERT.Parameters.AddWithValue("Password", Request.Form["Password"]);
+            INSERT.Parameters.AddWithValue("Email", Request.Form["Email"]);
+            INSERT.Parameters.AddWithValue("Phone", Request.Form["Phone"]);
+            INSERT.ExecuteNonQuery();
+            Response.Write("Insert Sucessful!");
+            Response.Redirect("/Home/Login");
+        }
+    }
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <form id="form1" method="post">
+        <p>
+            Username:
+            <input name="UserName" type="text">
+        </p>
+        <p>
+            Password:
+            <input name="Password" type="text">
+        </p>
+        <p>
+        <p>
+            Email:
+            <input name="Email" type="text">
+        </p>
+        <p>
+            Phone:
+            <input name="Phone" type="text">
+        </p>
+
+        &nbsp;&nbsp;
+        <input name="Signup" type="submit" value="Signup" />
+        </p>
+        <p>
+
+</body>
+</html><
