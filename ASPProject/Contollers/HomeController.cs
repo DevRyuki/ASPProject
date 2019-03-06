@@ -23,5 +23,9 @@ namespace ASPProject.Contollers
         {
             return View();
         }
+        public ActionResult Signup()
+        {
+            return View();
+        }
     }
 }
