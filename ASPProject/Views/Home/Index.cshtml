@@ -61,13 +61,15 @@
 				<thead>
 				<th>Name</th>
 				<th>Description</th>
-				<th>Date</th></thead>
+				<th>Date</th>
+				<th>Tools</th></thead>
 				@while (rdr.Read())
 				{
 					<tr>
 						<td>@rdr.GetString(1)</td>
 						<td>@rdr.GetString(2)</td>
 						<td>@rdr.GetDateTime(3).ToShortDateString()</td>
+						<td><a href="./Delete?id=@rdr.GetInt32(0)">Del</a></td>
 					</tr>
 				}
 				</tbody>
