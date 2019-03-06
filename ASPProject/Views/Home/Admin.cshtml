@@ -2,11 +2,17 @@
 @using System.Data.SqlClient;
 @{
     Layout = null;
-    bool failed = false;
+
 
     SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
 
     connect.Open();
+
+    string query = "SELECT * from Users";
+    SqlCommand Users = new SqlCommand(query, connect);
+
+
+    SqlDataReader UserList = Users.ExecuteReader();
 
 
 }
@@ -41,38 +47,26 @@
     </form>
     <div>
         <p>
-            @{
-                
-                string query = "SELECT * from Users";
-                SqlCommand Users = new SqlCommand(query, connect);
-
-
-                
-
-
-                connect.Close();
-
-                if (IsPost)
+            <table border="1" cellpadding="5">
+                <tbody>
+                <thead>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Phone</th></thead>
+                @while (UserList.Read())
                 {
-                    if (Request.Form["txtUserID"] != null)
-                    {
-                        string query = "SELECT * from Users where ID = " + txtUserID;
-                        SqlCommand Users = new SqlCommand(query, connect);
-
-
-
-                        connect.Close();
-
-                    }
-
-
-                    if (failed)
-                    {
-                        @String.Format("Connetion to Database failed.")
-                    }
+                    <tr>
+                        <td>@UserList.GetString(0)</td>
+                        <td>@UserList.GetString(1)</td>
+                        <td>@UserList.GetString(2)</td>
+                        <td>@UserList.GetString(3)</td>
+                        <td>@UserList.GetString(4)</td>
+                    </tr>
                 }
-            }
-
+                </tbody>
+            </table>
         </p>
 
     </div>
@@ -80,3 +74,12 @@
 
 </body>
 </html>
+
+
+
+
+
+
+@{
+    connect.Close();
+}
