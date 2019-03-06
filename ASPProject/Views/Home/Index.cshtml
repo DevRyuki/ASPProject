@@ -1,18 +1,88 @@
-﻿
+﻿@using System.Configuration;
+@using System.Data.SqlClient;
 @{
-    Layout = null;
+	Layout = null;
+	HtmlString validate = new HtmlString("");
+	if (HttpContext.Current.Session["Username"] == null)
+	{
+
+		Response.Redirect("~/Home/Login");
+	}
+
+	SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
+	connect.Open();
+
+	if (IsPost)
+	{
+		if (Request.Form["addname"] == null || Request.Form["adddesc"] == null || Request.Form["adddate"] == null
+			|| Request.Form["addname"].Trim() == "" || Request.Form["adddesc"].Trim() == "" || Request.Form["adddate"].Trim() == "")
+		{
+			validate = new HtmlString("Some fields are missing!<br>");
+		}
+		else
+		{
+			string insq = "INSERT INTO Tasks values('" + Request.Form["addname"] + "','" + Request.Form["adddesc"] + "','" + Request.Form["adddate"] + "','" + HttpContext.Current.Session["Username"].ToString() + "')";
+			SqlCommand ins = new SqlCommand(insq, connect);
+			if (ins.ExecuteNonQuery() <= 0)
+			{
+				validate = new HtmlString("Failed to insert task.<br>");
+			}
+			else
+			{
+				validate = new HtmlString("Successfully inserted task.<br>");
+			}
+		}
+	}
+	string query = "SELECT * from Tasks where usr='" + HttpContext.Current.Session["Username"].ToString() + "'";
+	SqlCommand tasks = new SqlCommand(query, connect);
+
+	SqlDataReader rdr = tasks.ExecuteReader();
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+	<meta name="viewport" content="width=device-width" />
+	<title>Index</title>
+	<style>
+		label {
+			display:inline-block;
+			width: 70px;
+		}
+	</style>
 </head>
 <body>
-    <div> 
-		POGGERS
-    </div>
+	<div>
+		<h1>Welcome @HttpContext.Current.Session["Username"]!</h1>
+		<div id="tasks">
+			<table border="1" cellpadding="5">
+				<tbody>
+				<thead>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Date</th></thead>
+				@while (rdr.Read())
+				{
+					<tr>
+						<td>@rdr.GetString(1)</td>
+						<td>@rdr.GetString(2)</td>
+						<td>@rdr.GetDateTime(3).ToShortDateString()</td>
+					</tr>
+				}
+				</tbody>
+			</table>
+		</div>
+		<h1>Add new</h1>
+		<form method="post">@validate
+			<label>Name: </label><input type="text" name="addname" /><br />
+			<label>Desc: </label><input type="text" name="adddesc" /><br />
+			<label>Date: </label><input type="date" name="adddate" /><br />
+			<input type="submit" name="add" value="Add" />
+		</form>
+	</div>
 </body>
 </html>
+@{
+	connect.Close();
+}
