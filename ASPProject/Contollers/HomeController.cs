@@ -18,5 +18,10 @@ namespace ASPProject.Contollers
         {
             return View();
         }
+
+        public ActionResult Admin()
+        {
+            return View();
+        }
     }
 }
