@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Login";
+    if (HttpContext.Current.Session["Username"] != null)
+    {
+        Response.Redirect("/Home/Index");
+        return;
+    }
+    ViewBag.nav = new HtmlString(@"
+                <li class='nav-item active'>
+                    <a class='nav-link' href='Login'>Home <span class='sr-only'>(current)</span></a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='About'>About</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='Signup'>Signup</a>
+                </li>
+                ");
+}
+
+<form id="form1" method="post" action="LoginPOST">
+    <table>
+        <tr>
+            <td>
+                Username:&nbsp;
+            </td>
+            <td>
+                <input name="UserName" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Password:
+            </td>
+            <td>
+                <input name="Password" type="password">
+            </td>
+        </tr>
+    </table>
+    <br />
+	<p>
+		<input name="Login" type="submit" value="Login" />
+		&nbsp;&nbsp;
+		<input name="Signup" type="submit" value="Signup" />
+	</p>
+	<p>
+		@{
+			if (ViewBag.failed != null && ViewBag.failed)
+			{
+				@String.Format("Login failed.")
+			}
+		}
+	</p>
+</form>

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPProject", "ASPProject\ASPProject.csproj", "{D373A8C6-8991-4BF0-B80C-19DF5318F1F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPProjectRedux", "ASPProjectRedux\ASPProjectRedux.csproj", "{5154F373-BEFE-43CA-9BBC-C65D1A9CBBEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D373A8C6-8991-4BF0-B80C-19DF5318F1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D373A8C6-8991-4BF0-B80C-19DF5318F1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D373A8C6-8991-4BF0-B80C-19DF5318F1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D373A8C6-8991-4BF0-B80C-19DF5318F1F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5154F373-BEFE-43CA-9BBC-C65D1A9CBBEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5154F373-BEFE-43CA-9BBC-C65D1A9CBBEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5154F373-BEFE-43CA-9BBC-C65D1A9CBBEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5154F373-BEFE-43CA-9BBC-C65D1A9CBBEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

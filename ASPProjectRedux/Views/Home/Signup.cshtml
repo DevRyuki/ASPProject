@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Signup";
+    ViewBag.nav = new HtmlString(@"
+                <li class='nav-item'>
+                    <a class='nav-link' href='Login'>Home</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='About'>About</a>
+                </li>
+                <li class='nav-item active'>
+                    <a class='nav-link' href='Signup'>Signup <span class='sr-only'>(current)</span></a>
+                </li>
+                ");
+}
+<form id="form1" method="post" action="SignupPOST">
+    <table>
+        <tr>
+            <td>
+                Username:&nbsp;
+            </td>
+            <td>
+                <input name="UserName" type="text" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Password:
+            </td>
+            <td>
+                <input name="Password" type="text" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email:
+            </td>
+            <td>
+                <input name="Email" type="text" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Phone:
+            </td>
+            <td>
+                <input name="Phone" type="text" required>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <input name="Signup" type="submit" value="Signup" />
+    </p>
+    <p>
+</form>

@@ -1,0 +1,83 @@
+﻿@using System.Configuration;
+@using System.Data.SqlClient;
+@{
+    ViewBag.Title = "Home";
+    ViewBag.nav = new HtmlString(@"
+                <li class='nav-item active'>
+                    <a class='nav-link' href='Index'>Home <span class='sr-only'>(current)</span></a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='About'>About</a>
+                </li>
+                ");
+                 
+                 
+    HtmlString validate = new HtmlString("");
+    if (HttpContext.Current.Session["Username"] == null)
+    {
+
+        Response.Redirect("~/Home/Login");
+        return;
+    }
+
+    SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
+    connect.Open();
+    string query = "SELECT * from Tasks where usr='" + HttpContext.Current.Session["Username"].ToString() + "'";
+    SqlCommand tasks = new SqlCommand(query, connect);
+
+    SqlDataReader rdr = tasks.ExecuteReader();
+}
+<div class="indent1">
+	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1>
+	<div id="tasks">
+		<table border="1" cellpadding="5">
+			<tbody>
+			<thead>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Date</th>
+				<th>Tools</th>
+            </thead>
+			@while (rdr.Read())
+			{
+				<tr>
+					<td>@rdr.GetString(1)</td>
+					<td>@rdr.GetString(2)</td>
+					<td>@rdr.GetDateTime(3).ToShortDateString()</td>
+					<td><a href="./Delete?id=@rdr.GetInt32(0)">Del</a></td>
+				</tr>
+			}
+			</tbody>
+		</table>
+	</div>
+    <br />
+	<h2>Add new</h2>
+	<form method="post" action="AddTask">@ViewBag.validate
+    <table>
+        <tr>
+            <td><label>Name:</label>&nbsp;</td>
+            <td><input type="text" name="addname" /></td>
+        </tr>
+        <tr>
+            <td>
+                <label>Desc:</label>
+            </td>
+            <td>
+                <input type="text" name="adddesc" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Date:</label>
+            </td>
+            <td>
+                <input type="date" name="adddate" />
+            </td>
+        </tr>
+    </table>
+		<input type="submit" name="add" value="Add" />
+	</form>
+</div>
+@{
+	connect.Close();
+}
