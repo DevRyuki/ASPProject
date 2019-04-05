@@ -44,7 +44,7 @@
 					<td>@rdr.GetString(1)</td>
 					<td>@rdr.GetString(2)</td>
 					<td>@rdr.GetDateTime(3).ToShortDateString()</td>
-					<td><a href="./Delete?id=@rdr.GetInt32(0)">Del</a></td>
+					<td><a href="@String.Format("{0}?id={1}", Url.Action("Delete", "Home"), rdr.GetInt32(0))">Del</a></td>
 				</tr>
 			}
 			</tbody>
@@ -52,7 +52,8 @@
 	</div>
     <br />
 	<h2>Add new</h2>
-	<form method="post" action="AddTask">@ViewBag.validate
+    <form method="post" action="@Url.Action("AddTask", "Home")">
+        @ViewBag.validate
     <table>
         <tr>
             <td><label>Name:</label>&nbsp;</td>
@@ -75,8 +76,8 @@
             </td>
         </tr>
     </table>
-		<input type="submit" name="add" value="Add" />
-	</form>
+    <input type="submit" name="add" value="Add" />
+</form>
 </div>
 @{
 	connect.Close();

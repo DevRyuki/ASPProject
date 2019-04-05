@@ -16,7 +16,7 @@ namespace ASPProjectRedux
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "", action = "", id = UrlParameter.Optional } // A stupid hack to prevent ./Home/Index turning into ./
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional } // A stupid hack to prevent ./Home/Index turning into ./
             );
         }
     }
