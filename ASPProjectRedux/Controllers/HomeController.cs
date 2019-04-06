@@ -164,5 +164,12 @@ namespace ASPProject.Contollers
             }
             return RedirectToAction("Index", "Home");
         } // 
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+
     }
 }
