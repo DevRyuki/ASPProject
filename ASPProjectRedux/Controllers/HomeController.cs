@@ -73,10 +73,6 @@ namespace ASPProject.Contollers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult Admin()
-        {
-            return View();
-        }
 
         public ActionResult Signup()
         {
