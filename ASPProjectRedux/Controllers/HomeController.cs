@@ -58,7 +58,7 @@ namespace ASPProject.Contollers
                     HttpContext.Session["Username"] = Request.Form["UserName"];
                     if (Request.Form["UserName"] == "admin")
                     {
-                        return RedirectToAction("Admin", "Home");
+                        return RedirectToAction("Index", "Users");
                     }
                     else
                     {
