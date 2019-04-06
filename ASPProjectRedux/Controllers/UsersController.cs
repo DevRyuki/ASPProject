@@ -53,6 +53,9 @@ namespace ASPProjectRedux.Controllers
         {
             if (ModelState.IsValid)
             {
+                Guid guid = Guid.NewGuid();
+                user.ID = guid.ToString("D");
+
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
