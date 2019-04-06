@@ -46,12 +46,14 @@
             </thead>
 			@while (rdr.Read())
 			{
-				<tr>
-					<td>@rdr.GetString(1)</td>
-					<td>@rdr.GetString(2)</td>
-					<td>@rdr.GetDateTime(3).ToShortDateString()</td>
-					<td><a href="@String.Format("{0}?id={1}", Url.Action("Delete", "Home"), rdr.GetInt32(0))">Del</a></td>
-				</tr>
+                <tr>
+                    <td>@rdr.GetString(1)</td>
+                    <td>@rdr.GetString(2)</td>
+                    <td>@rdr.GetDateTime(3).ToShortDateString()</td>
+                    <td><a href="@String.Format("{0}?id={1}", Url.Action("Delete", "Home"), rdr.GetInt32(0))">Del</a>
+                        <a href="@String.Format("{0}?id={1}", Url.Action("Edit", "Home"), rdr.GetInt32(0))">Edit</a></td>
+                    
+                </tr>
 			}
 			</tbody>
 		</table>

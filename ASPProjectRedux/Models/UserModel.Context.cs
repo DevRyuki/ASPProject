@@ -26,5 +26,6 @@ namespace ASPProjectRedux.Models
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Task> Tasks { get; set; }
     }
 }
