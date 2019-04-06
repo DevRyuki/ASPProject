@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Are you sure you want to signout?";
+    ViewBag.nav = new HtmlString(@"
+<li class='nav-item'>
+    <a class='nav-link' href='About'>About</a>
+
+
+");
+
+
+}
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Log Off", "LogoutPOST", "Home")</li>
+
+    </ul>
+</div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+    @using (Html.BeginForm("LogoutPOST", "Home"))
+    {
+        <button type="submit">Signout</button>
+    }
+    </ul>
+    </div>
+
+</body>
+</html>

@@ -37,6 +37,21 @@ namespace ASPProject.Contollers
             return View();
         }
 
+        public ActionResult Signout()
+        {
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult LogoutPOST()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+
+        }
+
         public ActionResult LoginPOST()
         {
             if (Request.Form["Signup"] != null)
@@ -73,10 +88,7 @@ namespace ASPProject.Contollers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult Admin()
-        {
-            return View();
-        }
+     
 
         public ActionResult Signup()
         {
