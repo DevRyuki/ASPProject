@@ -24,25 +24,53 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Admin</title>
+
+    <script>
+        function btnReadOnly() {
+
+        }
+
+        function btnCLear() {
+
+        }
+
+
+    </script>
+
 </head>
 <body>
     <form id="form1" method="post">
         <p>
-            <label for="txtUserID">User ID:</label>
-            <input id="txtUserID" type="text" /><br />
-            <label for="txtUserName">Username:</label>
-            <input id="txtUserName" type="text" /><br />
-            <label for="txtEmail">Email:</label>
-            <input id="txtEmail" type="text" /><br />
-            <label for="txtPhone">Phone #:</label>
-            <input id="txtPhone" type="text" /><br />
+            <div class="form-row">
+                <div class="form-group col-sm-2">
+                    <label for="txtUserID">User ID:</label>
+                    <input id="txtUserID" class="form-control" type="text" />
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="txtUserName">Username:</label>
+                    <input id="txtUserName" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-2">
+                    <label for="txtEmail">Email:</label>
+                    <input id="txtEmail" class="form-control" type="text" />
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="txtPhone">Phone #:</label>
+                    <input id="txtPhone" class="form-control" type="text" />
+                </div>
+            </div>
         </p>
 
         <p>
-            <input id="btnLoad" type="button" value="Load" />
-            <input id="btnInsert" type="button" value="Insert" />
-            <input id="btnUpdate" type="button" value="Update" />
-            <input id="btnDelete" type="button" value="Delete" />
+            <div class="form-group">
+                <input id="btnLoad" type="button" class="btn btn-primary" value="Load" onclick="btnReadOnly()" />
+                <input id="btnInsert" type="button" class="btn btn-secondary" value="Insert" />
+                <input id="btnUpdate" type="button" class="btn btn-secondary" value="Update" />
+                <input id="btnDelete" type="button" class="btn btn-danger" value="Delete" />
+                <input id="btnClear" type="button" class="btn btn-outline-dark" value="Clear" onclick="btnClear()"/>
+            </div>
         </p>
     </form>
     <div>
