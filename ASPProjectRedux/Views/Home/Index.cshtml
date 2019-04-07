@@ -34,7 +34,7 @@
 	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1>
 	<div id="tasks" class="inlinetbl">
         <h4>All Tasks</h4>
-        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 420px">
+        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 450px">
             <tbody>
             <thead>
             <th>Name</th>
@@ -60,14 +60,14 @@
     @{
         rdr.Close();
 
-        string uquery = "SELECT * from Tasks where usr='" + HttpContext.Current.Session["Username"].ToString() + "' AND Tasks.date > DATEADD(dd,-3,GETDATE())";
+        string uquery = "SELECT * from Tasks where usr='" + HttpContext.Current.Session["Username"].ToString() + "' AND Tasks.date < DATEADD(dd,3,GETDATE()) AND Tasks.date > GETDATE()";
         SqlCommand utasks = new SqlCommand(uquery, connect);
 
         rdr = utasks.ExecuteReader();
     }
     <div id="tasks" class="inlinetbl" style="padding-left: 10px;">
         <h4>Upcoming Tasks</h4>
-        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 420px">
+        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 450px">
             <tbody>
             <thead>
             <th>Name</th>
