@@ -155,7 +155,7 @@ namespace ASPProject.Contollers
             if (Request.Form["addname"] == null || Request.Form["adddesc"] == null || Request.Form["adddate"] == null
             || Request.Form["addname"].Trim() == "" || Request.Form["adddesc"].Trim() == "" || Request.Form["adddate"].Trim() == "")
             {
-                validate = "Some fields are missing! <br>";
+                validate = "<div class='erralert'>Some fields are missing!</div>";
             }
             else
             {
@@ -165,11 +165,11 @@ namespace ASPProject.Contollers
                 SqlCommand ins = new SqlCommand(insq, connect);
                 if (ins.ExecuteNonQuery() <= 0)
                 {
-                    validate = "Failed to insert task. <br>";
+                    validate = "<div class='erralert'>Failed to insert task.</div>";
                 }
                 else
                 {
-                    validate = "Successfully inserted task. <br>";
+                    validate = "<div class='succalert'>Successfully created task.</div>";
                 }
                 connect.Close();
             }
@@ -232,11 +232,15 @@ namespace ASPProject.Contollers
             {
                 return RedirectToAction("Login", "Home");
             }
+            if (Request.Form["can"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             string validate = "";
             if (Request.Form["tid"] == null || Request.Form["tid"].Trim() == "" || Request.Form["tname"] == null || Request.Form["tdesc"] == null || Request.Form["tdate"] == null
             || Request.Form["tname"].Trim() == "" || Request.Form["tdesc"].Trim() == "" || Request.Form["tdate"].Trim() == "")
             {
-                validate = "Some fields are missing! <br>";
+                validate = "<div class='erralert'>Some fields are missing!</div>";
             }
 
             if (validate == "")
@@ -258,17 +262,17 @@ namespace ASPProject.Contollers
                         }
                         else
                         {
-                            validate = "Invalid date! <br>";
+                            validate = "<div class='erralert'>Invalid date!</div>";
                         }
                     }
                     else
                     {
-                        validate = "Failed to update task! <br>";
+                        validate = "<div class='erralert'>Failed to update task!</div>";
                     }
                 }
                 else
                 {
-                    validate = "Failed to update task! <br>";
+                    validate = "<div class='erralert'>Failed to update task!</div>";
                 }
             }
 

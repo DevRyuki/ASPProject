@@ -32,7 +32,7 @@
 }
 <div class="indent1">
 	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1>
-	<div id="tasks" class="inlinetbl">
+	<div id="tasks" class="inlinetbl" style="padding-right: 10px;">
         <h4>All Tasks</h4>
         <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 650px">
             <tbody>
@@ -65,7 +65,7 @@
 
         rdr = utasks.ExecuteReader();
     }
-    <div id="tasks" class="inlinetbl" style="padding-left: 10px;">
+    <div id="tasks" class="inlinetbl">
         <h4>Upcoming Tasks</h4>
         <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 650px">
             <tbody>
@@ -120,7 +120,7 @@
             </td>
         </tr>
     </table><br />
-    <input type="submit" name="add" value="Add" />
+        <input class="btn btn-primary" type="submit" name="add" value="Add" />
 </form>
 </div>
 @{

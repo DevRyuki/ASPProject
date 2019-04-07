@@ -23,15 +23,15 @@
         @{
             if (ViewBag.failed != null && ViewBag.failed)
             {
-                @String.Format("Login failed.")
+                <div class='erralert'>Login failed.</div>
             }
             else if (Request.QueryString["signup"] != null)
             {
-                @String.Format("Signup Successful.")
+                <div class='succalert'>Signup Successful.</div>
             }
             else if (Request.QueryString["signout"] != null)
             {
-                @String.Format("Signout Successful.")
+                <div class='succalert'>Signout Successful.</div>
             }
         }
     </p>
@@ -55,8 +55,8 @@
     </table>
     <br />
     <p>
-        <input name="Login" type="submit" value="Login" />
+        <input class="btn btn-primary" name="Login" type="submit" value="Login" />
         &nbsp;&nbsp;
-        <input name="Signup" type="submit" value="Signup" />
+        <input class="btn btn-secondary" name="Signup" type="submit" value="Signup" />
     </p>
 </form>
