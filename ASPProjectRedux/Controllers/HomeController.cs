@@ -5,11 +5,14 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ASPProjectRedux.Models;
 
 namespace ASPProject.Contollers
 {
     public class HomeController : Controller
     {
+        private LoginEntities db = new LoginEntities();
+        
         // GET: Home
         public ActionResult Index()
         {
@@ -111,13 +114,17 @@ namespace ASPProject.Contollers
                 INSERT.Parameters.AddWithValue("Email", Request.Form["Email"]);
                 INSERT.Parameters.AddWithValue("Phone", Request.Form["Phone"]);
                 INSERT.ExecuteNonQuery();
-                Response.Write("Insert Sucessful!");
+                //Response.Write("Insert Sucessful!");
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Login", "Home", new { signup=1 });
         }
 
         public ActionResult Delete()
         {
+            if (HttpContext.Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if(Request.QueryString["id"] != null)
             {
                 SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
@@ -136,6 +143,10 @@ namespace ASPProject.Contollers
         [HttpPost]
         public ActionResult AddTask()
         {
+            if (HttpContext.Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             string validate;
             if (Request.Form["addname"] == null || Request.Form["adddesc"] == null || Request.Form["adddate"] == null
             || Request.Form["addname"].Trim() == "" || Request.Form["adddesc"].Trim() == "" || Request.Form["adddate"].Trim() == "")
@@ -170,6 +181,102 @@ namespace ASPProject.Contollers
         public ActionResult About()
         {
             return View();
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (HttpContext.Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            try
+            {
+                if (Request.Cookies["validatEdit"] != null)
+                {
+                    ViewBag.validate = new HtmlString(HttpUtility.UrlDecode(Request.Cookies.Get("validatEdit").Value));
+                    Response.Cookies.Remove("validatEdit");
+                }
+            }
+            catch (Exception e)
+            {
+                Response.Cookies.Remove("validatEdit");
+            }
+            if (!id.HasValue)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            string usern = (string)HttpContext.Session["Username"];
+            Task t = db.Tasks.First(x => x.usr == usern && x.Id == id.Value);
+            if(t != null) {
+                ViewBag.tname = t.name;
+                ViewBag.tdesc = t.desc;
+                ViewBag.tdate = t.date.ToString("yyyy-MM-dd");
+                ViewBag.tid = id.Value;
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditTask()
+        {
+            if (HttpContext.Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            string validate = "";
+            if (Request.Form["tid"] == null || Request.Form["tid"].Trim() == "" || Request.Form["tname"] == null || Request.Form["tdesc"] == null || Request.Form["tdate"] == null
+            || Request.Form["tname"].Trim() == "" || Request.Form["tdesc"].Trim() == "" || Request.Form["tdate"].Trim() == "")
+            {
+                validate = "Some fields are missing! <br>";
+            }
+
+            if (validate == "")
+            {
+                int id = 0;
+                if (int.TryParse(Request.Form["tid"], out id))
+                {
+                    string usern = (string)HttpContext.Session["Username"];
+                    ASPProjectRedux.Models.Task t = db.Tasks.First(x => x.usr == usern && x.Id == id);
+                    if (t != null)
+                    {
+                        DateTime td = new DateTime();
+                        t.name = Request.Form["tname"];
+                        t.desc = Request.Form["tdesc"];
+                        if (DateTime.TryParse(Request.Form["tdate"], out td))
+                        {
+                            t.date = td;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            validate = "Invalid date! <br>";
+                        }
+                    }
+                    else
+                    {
+                        validate = "Failed to update task! <br>";
+                    }
+                }
+                else
+                {
+                    validate = "Failed to update task! <br>";
+                }
+            }
+
+            if (validate != "")
+            {
+                HttpCookie k = new HttpCookie("validatEdit", HttpUtility.UrlEncode(validate));
+                k.Expires = DateTime.Now.AddSeconds(5);
+                Response.Cookies.Add(k);
+                return RedirectToAction("Edit", "Home");
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
 

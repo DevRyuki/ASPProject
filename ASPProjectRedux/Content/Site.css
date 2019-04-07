@@ -22,3 +22,14 @@ textarea {
 .titleh {
     margin-bottom: 30px;
 }
+
+table {
+    border: 0;
+}
+
+th {
+    border: 1px solid rgb(33, 37, 41);
+    background-color: rgb(33, 37, 41);
+    color: #ffffff;
+    text-align:center;
+}

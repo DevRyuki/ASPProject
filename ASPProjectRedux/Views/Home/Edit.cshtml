@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Edit Task";
+    if (HttpContext.Current.Session["Username"] == null)
+    {
+        Response.Redirect("/Home/Index");
+        return;
+    }
+    ViewBag.nav = new HtmlString(@"
+                <li class='nav-item'>
+                    <a class='nav-link' href='Login'>Home</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='About'>About</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='Signup'>Signup</a>
+                </li>
+                ");
+}
+
+
+<form method="post" action="@Url.Action("EditTask", "Home")">
+    @ViewBag.validate
+    <table>
+        <tr>
+            <td><label>Name:</label>&nbsp;</td>
+            <td><input type="text" name="tname" value="@ViewBag.tname" required /></td>
+        </tr>
+        <tr>
+            <td>
+                <label>Desc:</label>
+            </td>
+            <td>
+                <input type="text" name="tdesc" value="@ViewBag.tdesc" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Date:</label>
+            </td>
+            <td>
+                <input type="date" name="tdate" value="@ViewBag.tdate" required />
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="tid" value="@ViewBag.tid" />
+    <br />
+    <input type="submit" name="save" value="Save" />
+    <input type="submit" name="can" value="Cancel" />
+</form>

@@ -36,7 +36,7 @@
 <div class="indent1">
 	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1>
 	<div id="tasks">
-		<table border="1" cellpadding="5">
+		<table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate">
 			<tbody>
 			<thead>
 				<th>Name</th>
@@ -50,8 +50,9 @@
                     <td>@rdr.GetString(1)</td>
                     <td>@rdr.GetString(2)</td>
                     <td>@rdr.GetDateTime(3).ToShortDateString()</td>
-                    <td><a href="@String.Format("{0}?id={1}", Url.Action("Delete", "Home"), rdr.GetInt32(0))">Del</a>
-                        <a href="@String.Format("{0}?id={1}", Url.Action("Edit", "Home"), rdr.GetInt32(0))">Edit</a></td>
+                    <td>
+                        <a href="@String.Format("{0}?id={1}", Url.Action("Edit", "Home"), rdr.GetInt32(0))">Edit</a> | <a href="@String.Format("{0}?id={1}", Url.Action("Delete", "Home"), rdr.GetInt32(0))">Del</a>
+                    </td>
                     
                 </tr>
 			}
@@ -83,7 +84,7 @@
                 <input type="date" name="adddate" />
             </td>
         </tr>
-    </table>
+    </table><br />
     <input type="submit" name="add" value="Add" />
 </form>
 </div>

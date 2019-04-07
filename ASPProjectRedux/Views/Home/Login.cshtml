@@ -19,6 +19,18 @@
 }
 
 <form id="form1" method="post" action="@Url.Action("LoginPOST", "Home")">
+    <p>
+        @{
+            if (ViewBag.failed != null && ViewBag.failed)
+            {
+                @String.Format("Login failed.")
+            }
+            else if (Request.QueryString["signup"] != null)
+            {
+                @String.Format("Signup Successful.")
+            }
+}
+    </p>
     <table>
         <tr>
             <td>
@@ -42,13 +54,5 @@
         <input name="Login" type="submit" value="Login" />
         &nbsp;&nbsp;
         <input name="Signup" type="submit" value="Signup" />
-    </p>
-    <p>
-        @{
-            if (ViewBag.failed != null && ViewBag.failed)
-            {
-                @String.Format("Login failed.")
-            }
-        }
     </p>
 </form>
