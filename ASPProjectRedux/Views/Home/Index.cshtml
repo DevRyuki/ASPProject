@@ -32,6 +32,9 @@
 }
 <div class="indent1">
 	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1>
+    <form action="@Url.Action("Index", "Home")">
+        <input type="text" name="search" placeholder="Search" class="form-control" /><input class="btn btn-primary" type="submit" value="Go" />
+    </form>
 	<div id="tasks" class="inlinetbl" style="padding-right: 10px;">
         <h4>All Tasks</h4>
         <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 650px">
