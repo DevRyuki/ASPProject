@@ -44,7 +44,7 @@
 <div class="indent1">
 	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1><br />
     <form action="@Url.Action("Index", "Home")">
-        <input type="text" name="search" placeholder="Search" class="form-control" style="display:inline-block" /><input class="btn btn-primary" type="submit" value="Go" style="display:inline-block;margin-top:-5px" />
+        <input type="text" name="search" placeholder="Search" class="form-control" style="display:inline-block" value="@Request.QueryString["search"]" /><input class="btn btn-primary" type="submit" value="Go" style="display:inline-block;margin-top:-5px" />
     </form><br />
 	<div id="tasks" class="inlinetbl" style="padding-right: 10px;">
         <h4>All Tasks</h4>
