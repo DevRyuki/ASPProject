@@ -69,10 +69,13 @@ namespace ASPProject.Contollers
             {
                 SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
                 connect.Open();
-                string query = "SELECT COUNT(*) from Users where Usr='" + Request.Form["UserName"] + "' AND Password='" + Request.Form["Password"] + "'";
+                string query = "SELECT COUNT(*) from Users where Usr=@un AND Password=@pw";
                 SqlCommand Login = new SqlCommand(query, connect);
-
-                int count = Convert.ToInt32(Login.ExecuteScalar());
+                Login.Parameters.AddWithValue("@un", Request.Form["UserName"]);
+                Login.Parameters.AddWithValue("@pw", Request.Form["Password"]);
+                object exec = Login.ExecuteScalar();
+                Console.WriteLine(exec);
+                int count = Convert.ToInt32(exec);
 
                 connect.Close();
                 if (count == 1)
@@ -116,11 +119,11 @@ namespace ASPProject.Contollers
                 SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
                 connect.Open();
                 SqlCommand INSERT = new SqlCommand("insert into Users (ID,Usr,Password,Phone,Email) values (@ID,@Usr,@Password,@Phone,@Email)", connect);
-                INSERT.Parameters.AddWithValue("ID", id);
-                INSERT.Parameters.AddWithValue("Usr", un);
-                INSERT.Parameters.AddWithValue("Password", Request.Form["Password"]);
-                INSERT.Parameters.AddWithValue("Email", Request.Form["Email"]);
-                INSERT.Parameters.AddWithValue("Phone", Request.Form["Phone"]);
+                INSERT.Parameters.AddWithValue("@ID", id);
+                INSERT.Parameters.AddWithValue("@Usr", un);
+                INSERT.Parameters.AddWithValue("@Password", Request.Form["Password"]);
+                INSERT.Parameters.AddWithValue("@Email", Request.Form["Email"]);
+                INSERT.Parameters.AddWithValue("@Phone", Request.Form["Phone"]);
                 INSERT.ExecuteNonQuery();
                 //Response.Write("Insert Sucessful!");
             }
@@ -137,8 +140,9 @@ namespace ASPProject.Contollers
             {
                 SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
                 connect.Open();
-                string query = "DELETE from Tasks where Id=" + Request.QueryString["id"].ToString();
+                string query = "DELETE from Tasks where Id=@ID";
                 SqlCommand taskdel = new SqlCommand(query, connect);
+                taskdel.Parameters.AddWithValue("@ID", Request.QueryString["id"].ToString());
                 //TODO: Message confirmation
                 taskdel.ExecuteNonQuery();
                 connect.Close();
@@ -165,8 +169,12 @@ namespace ASPProject.Contollers
             {
                 SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
                 connect.Open();
-                string insq = "INSERT INTO Tasks values('" + Request.Form["addname"] + "','" + Request.Form["adddesc"] + "','" + Request.Form["adddate"] + "','" + HttpContext.Session["Username"].ToString() + "')";
+                string insq = "INSERT INTO Tasks values(@an,@ads,@ada,@un)";
                 SqlCommand ins = new SqlCommand(insq, connect);
+                ins.Parameters.AddWithValue("@an", Request.Form["addname"]);
+                ins.Parameters.AddWithValue("@ads", Request.Form["adddesc"]);
+                ins.Parameters.AddWithValue("@ada", Request.Form["adddate"]);
+                ins.Parameters.AddWithValue("@un", HttpContext.Session["Username"].ToString());
                 if (ins.ExecuteNonQuery() <= 0)
                 {
                     validate = "<div class='erralert'>Failed to insert task.</div>";

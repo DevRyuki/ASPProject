@@ -25,16 +25,27 @@
 
     SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
     connect.Open();
-    string query = "SELECT * from Tasks where usr='" + HttpContext.Current.Session["Username"].ToString() + "'";
-    SqlCommand tasks = new SqlCommand(query, connect);
+    SqlCommand query;
+    if (Request.QueryString["search"] == null)
+    {
+        query = new SqlCommand("SELECT * from Tasks where usr=@un", connect);
+        query.Parameters.AddWithValue("@un", HttpContext.Current.Session["Username"].ToString());
+    }
+    else
+    {
+        query = new SqlCommand("SELECT * from Tasks where usr=@un AND (name LIKE @nm OR [desc] LIKE @nm)", connect);
+        query.Parameters.AddWithValue("@un", HttpContext.Current.Session["Username"].ToString());
+        query.Parameters.AddWithValue("@nm", "%"+Request.QueryString["search"]+"%");
+    }
+    //SqlCommand tasks = new SqlCommand(query, connect);
 
-    SqlDataReader rdr = tasks.ExecuteReader();
+    SqlDataReader rdr = query.ExecuteReader();
 }
 <div class="indent1">
-	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1>
+	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1><br />
     <form action="@Url.Action("Index", "Home")">
-        <input type="text" name="search" placeholder="Search" class="form-control" /><input class="btn btn-primary" type="submit" value="Go" />
-    </form>
+        <input type="text" name="search" placeholder="Search" class="form-control" style="display:inline-block" /><input class="btn btn-primary" type="submit" value="Go" style="display:inline-block;margin-top:-5px" />
+    </form><br />
 	<div id="tasks" class="inlinetbl" style="padding-right: 10px;">
         <h4>All Tasks</h4>
         <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 650px">
@@ -63,8 +74,9 @@
     @{
         rdr.Close();
 
-        string uquery = "SELECT * from Tasks where usr='" + HttpContext.Current.Session["Username"].ToString() + "' AND Tasks.date < DATEADD(dd,3,GETDATE()) AND Tasks.date > GETDATE()";
+        string uquery = "SELECT * from Tasks where usr=@un AND Tasks.date < DATEADD(dd,3,GETDATE()) AND Tasks.date > GETDATE()";
         SqlCommand utasks = new SqlCommand(uquery, connect);
+        utasks.Parameters.AddWithValue("@un", HttpContext.Current.Session["Username"].ToString());
 
         rdr = utasks.ExecuteReader();
     }
