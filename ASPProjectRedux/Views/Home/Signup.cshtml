@@ -21,6 +21,14 @@
     {
         <div class="erralert">A user already exists with that name!</div>
     }
+    if (Request.QueryString["phone"] != null)
+    {
+        <div class="erralert">Phone number invalid!</div>
+    }
+    if (Request.QueryString["email"] != null)
+    {
+        <div class="erralert">Email invalid!</div>
+    }
 }
 <form id="form1" method="post" action="@Url.Action("SignupPOST", "Home")">
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ASPProjectRedux.Models;
+using System.Text.RegularExpressions;
 
 namespace ASPProject.Contollers
 {
@@ -110,6 +111,16 @@ namespace ASPProject.Contollers
         {
             if (Request.Form["Signup"] != null)
             {
+                Regex rxp = new Regex(@"^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$")
+                Regex rxe = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+                if (!rxe.IsMatch(Request.Form["Email"]))
+                {
+                    return RedirectToAction("Signup", "Home", new { email = 1 });
+                }
+                if (!rxp.IsMatch(Request.Form["Phone"]))
+                {
+                    return RedirectToAction("Signup", "Home", new { phone = 1 });
+                }
                 string un = Request.Form["UserName"];
                 if (db.Users.Any(x => x.Usr == un))
                 {
