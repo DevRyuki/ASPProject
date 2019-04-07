@@ -14,13 +14,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 @ViewBag.nav
+                @if(HttpContext.Current.Session["Username"] != null) {
+
+                    <li class='nav-item'>
+                        <a class='nav-link' href='@Url.Action("Signout", "Home")'>Signout</a>
+                    </li>
+                }
+                @if (ViewBag.Title != "Admin" && HttpContext.Current.Session["Username"] != null && HttpContext.Current.Session["Username"].ToString() == "admin")
+                {
+                
+                    <li class='nav-item'>
+                        <a class='nav-link' href='@Url.Action("Index", "Users")'>Admin</a>
+                    </li>
+                }
+                else if (ViewBag.Title == "Admin" && HttpContext.Current.Session["Username"] != null && HttpContext.Current.Session["Username"].ToString() == "admin")
+                {
+
+                    <li class='nav-item active'>
+                        <a class='nav-link' href='@Url.Action("Index", "Users")'>Admin <span class='sr-only'>(current)</span></a>
+                    </li>
+                }
             </ul>
         </div>
     </nav>
-    @if (HttpContext.Current.Session["Username"] == null || HttpContext.Current.Session["Username"] == "")
-    {
-
-    }
 
     <div class="body-content">
         <h1 class="titleh">@ViewBag.Title</h1>

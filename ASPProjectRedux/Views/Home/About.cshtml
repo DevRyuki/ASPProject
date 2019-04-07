@@ -1,16 +1,22 @@
 ﻿@{
-    ViewBag.Title = "Signup";
-    ViewBag.nav = new HtmlString(@"
+    ViewBag.Title = "About";
+    string n = @"
                 <li class='nav-item'>
                     <a class='nav-link' href='Login'>Home</a>
                 </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='About'>About</a>
-                </li>
                 <li class='nav-item active'>
-                    <a class='nav-link' href='Signup'>Signup <span class='sr-only'>(current)</span></a>
+                    <a class='nav-link' href='About'>About <span class='sr-only'>(current)</span></a>
                 </li>
-                ");
+                ";
+    if (HttpContext.Current.Session["Username"] == null)
+    {
+        n += @"
+                <li class='nav-item'>
+                    <a class='nav-link' href='Signup'>Signup</a>
+                </li>
+            ";
+    }
+    ViewBag.nav = new HtmlString(n);
 }
 
 <h2>About</h2>

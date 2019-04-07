@@ -2,29 +2,26 @@
 @using System.Data.SqlClient;
 @{
     ViewBag.Title = "Home";
-    ViewBag.nav = new HtmlString(@"
-                <li class='nav-item active'>
-                    <a class='nav-link' href='Index'>Home <span class='sr-only'>(current)</span></a>
-                </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='About'>About</a>
-                </li 
-
-<li class='nav-item'>
-                    <a class='nav-link' href='Home/Signout'>Signout</a>
-                </li>
-
-
-                ");
-                 
-                 
-    HtmlString validate = new HtmlString("");
     if (HttpContext.Current.Session["Username"] == null)
     {
 
         Response.Redirect("~/Home/Login");
         return;
     }
+    string n = @"
+                <li class='nav-item active'>
+                    <a class='nav-link' href='" + Url.Action("Index", "Home") + @"'>Home <span class='sr-only'>(current)</span></a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='" + Url.Action("About", "Home") + @"'>About</a>
+                </li>
+
+
+                ";
+    ViewBag.nav = new HtmlString(n);
+                 
+                 
+    HtmlString validate = new HtmlString("");
 
     SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
     connect.Open();

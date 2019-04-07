@@ -42,8 +42,12 @@ namespace ASPProject.Contollers
 
         public ActionResult Signout()
         {
-
-            return View();
+            if (HttpContext.Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            HttpContext.Session.Remove("Username");
+            return RedirectToAction("Login", "Home", new { signout=1 });
 
         }
 

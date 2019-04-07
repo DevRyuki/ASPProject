@@ -5,17 +5,15 @@
         Response.Redirect("/Home/Index");
         return;
     }
-    ViewBag.nav = new HtmlString(@"
+    string n = @"
                 <li class='nav-item'>
                     <a class='nav-link' href='Login'>Home</a>
                 </li>
                 <li class='nav-item'>
                     <a class='nav-link' href='About'>About</a>
                 </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='Signup'>Signup</a>
-                </li>
-                ");
+                ";
+    ViewBag.nav = new HtmlString(n);
 }
 
 

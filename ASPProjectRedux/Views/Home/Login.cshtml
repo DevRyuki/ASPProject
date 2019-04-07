@@ -29,7 +29,11 @@
             {
                 @String.Format("Signup Successful.")
             }
-}
+            else if (Request.QueryString["signout"] != null)
+            {
+                @String.Format("Signout Successful.")
+            }
+        }
     </p>
     <table>
         <tr>
