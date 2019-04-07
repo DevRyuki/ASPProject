@@ -186,13 +186,21 @@ namespace ASPProject.Contollers
                 ins.Parameters.AddWithValue("@ads", Request.Form["adddesc"]);
                 ins.Parameters.AddWithValue("@ada", Request.Form["adddate"]);
                 ins.Parameters.AddWithValue("@un", HttpContext.Session["Username"].ToString());
-                if (ins.ExecuteNonQuery() <= 0)
+                DateTime tmp = new DateTime();
+                if (DateTime.TryParse(Request.Form["adddate"], out tmp))
                 {
-                    validate = "<div class='erralert'>Failed to insert task.</div>";
+                    if (ins.ExecuteNonQuery() <= 0)
+                    {
+                        validate = "<div class='erralert'>Failed to insert task.</div>";
+                    }
+                    else
+                    {
+                        validate = "<div class='succalert'>Successfully created task.</div>";
+                    }
                 }
                 else
                 {
-                    validate = "<div class='succalert'>Successfully created task.</div>";
+                    validate = "<div class='erralert'>Invalid date.</div>";
                 }
                 connect.Close();
             }
