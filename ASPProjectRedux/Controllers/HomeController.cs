@@ -107,13 +107,17 @@ namespace ASPProject.Contollers
         {
             if (Request.Form["Signup"] != null)
             {
-
+                string un = Request.Form["UserName"];
+                if (db.Users.Any(x => x.Usr == un))
+                {
+                    return RedirectToAction("Signup", "Home", new { exists = 1 });
+                }
                 Guid id = Guid.NewGuid();
                 SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
                 connect.Open();
                 SqlCommand INSERT = new SqlCommand("insert into Users (ID,Usr,Password,Phone,Email) values (@ID,@Usr,@Password,@Phone,@Email)", connect);
                 INSERT.Parameters.AddWithValue("ID", id);
-                INSERT.Parameters.AddWithValue("Usr", Request.Form["UserName"]);
+                INSERT.Parameters.AddWithValue("Usr", un);
                 INSERT.Parameters.AddWithValue("Password", Request.Form["Password"]);
                 INSERT.Parameters.AddWithValue("Email", Request.Form["Email"]);
                 INSERT.Parameters.AddWithValue("Phone", Request.Form["Phone"]);

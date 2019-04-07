@@ -16,6 +16,11 @@
         Response.Redirect("/Home/Index");
         return;
     }
+
+    if (Request.QueryString["exists"] != null)
+    {
+        <div class="erralert">A user already exists with that name!</div>
+    }
 }
 <form id="form1" method="post" action="@Url.Action("SignupPOST", "Home")">
 
