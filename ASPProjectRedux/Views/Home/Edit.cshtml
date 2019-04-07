@@ -6,35 +6,35 @@
         return;
     }
     string n = @"
-                <li class='nav-item'>
-                    <a class='nav-link' href='Login'>Home</a>
-                </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='About'>About</a>
-                </li>
-                ";
+        <li class='nav-item'>
+            <a class='nav-link' href='Login'>Home</a>
+        </li>
+        <li class='nav-item'>
+            <a class='nav-link' href='About'>About</a>
+        </li>
+        ";
     ViewBag.nav = new HtmlString(n);
 }
 
 
 <form method="post" action="@Url.Action("EditTask", "Home")">
-        @ViewBag.validate
-        <div class="form-group col-sm-2">
-            <label for="tname">Name:</label>
-            <input id="tname" type="text" name="tname" class="form-control fcwide" value="@ViewBag.tname" required />
-        </div>
-        <div class="form-group col-sm-2">
-            <label for="tdesc">Desc:</label>
-            <textarea rows="7" id="tdesc" name="tdesc" class="form-control fcwide" required>@ViewBag.tdesc</textarea>
-        </div>
+    @ViewBag.validate
+    <div class="form-group col-sm-2">
+        <label for="tname">Name:</label>
+        <input id="tname" type="text" name="tname" class="form-control fcwide" value="@ViewBag.tname" required />
+    </div>
+    <div class="form-group col-sm-2">
+        <label for="tdesc">Desc:</label>
+        <textarea rows="7" id="tdesc" name="tdesc" class="form-control fcwide" required>@ViewBag.tdesc</textarea>
+    </div>
 
-        <div class="form-group col-sm-2">
-            <label for="tdesc">Date:</label>
-            <input id="tdate" type="date" name="tdate" class="form-control fcwide" value="@ViewBag.tdate" required />
-        </div>
+    <div class="form-group col-sm-2">
+        <label for="tdesc">Date:</label>
+        <input id="tdate" type="date" name="tdate" class="form-control fcwide" value="@ViewBag.tdate" required />
+    </div>
 
-        <input type="hidden" name="tid" value="@ViewBag.tid" />
-        <br />
-        <input class="btn btn-primary" type="submit" name="save" value="Save" />
-        <input class="btn btn-secondary" type="submit" name="can" value="Cancel" formnovalidate />
+    <input type="hidden" name="tid" value="@ViewBag.tid" />
+    <br />
+    <input class="btn btn-primary" type="submit" name="save" value="Save" />
+    <input class="btn btn-secondary" type="submit" name="can" value="Cancel" formnovalidate />
 </form>

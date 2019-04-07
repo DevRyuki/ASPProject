@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASPProjectRedux.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ASPProjectRedux.Models;
 
 namespace ASPProjectRedux.Controllers
 {
@@ -42,7 +42,7 @@ namespace ASPProjectRedux.Controllers
         }
 
 
-       
+
 
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

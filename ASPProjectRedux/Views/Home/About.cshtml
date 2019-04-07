@@ -1,20 +1,20 @@
 ﻿@{
     ViewBag.Title = "About";
     string n = @"
-                <li class='nav-item'>
-                    <a class='nav-link' href='Login'>Home</a>
-                </li>
-                <li class='nav-item active'>
-                    <a class='nav-link' href='About'>About <span class='sr-only'>(current)</span></a>
-                </li>
-                ";
+        <li class='nav-item'>
+            <a class='nav-link' href='Login'>Home</a>
+        </li>
+        <li class='nav-item active'>
+            <a class='nav-link' href='About'>About <span class='sr-only'>(current)</span></a>
+        </li>
+        ";
     if (HttpContext.Current.Session["Username"] == null)
     {
         n += @"
-                <li class='nav-item'>
-                    <a class='nav-link' href='Signup'>Signup</a>
-                </li>
-            ";
+        <li class='nav-item'>
+            <a class='nav-link' href='Signup'>Signup</a>
+        </li>
+    ";
     }
     ViewBag.nav = new HtmlString(n);
 }
@@ -31,10 +31,14 @@
     <br />
     <h3>Contact Us</h3>
     <p>Want to get in contact? Here's all you need to know!</p>
-    <p><b>Address:</b><br />
-    555 Wayward Lane<br />
-    Toronto, Ontario<br />
-    M5F 3G6</p>
-    <p><b>Email: </b>contact@tasky.org<br />
-    <b>Phone: </b>444-668-9476</p>
+    <p>
+        <b>Address:</b><br />
+        555 Wayward Lane<br />
+        Toronto, Ontario<br />
+        M5F 3G6
+    </p>
+    <p>
+        <b>Email: </b>contact@tasky.org<br />
+        <b>Phone: </b>444-668-9476
+    </p>
 </div>

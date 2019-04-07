@@ -9,18 +9,18 @@
         return;
     }
     string n = @"
-                <li class='nav-item active'>
-                    <a class='nav-link' href='" + Url.Action("Index", "Home") + @"'>Home <span class='sr-only'>(current)</span></a>
-                </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='" + Url.Action("About", "Home") + @"'>About</a>
-                </li>
+        <li class='nav-item active'>
+            <a class='nav-link' href='" + Url.Action("Index", "Home") + @"'>Home <span class='sr-only'>(current)</span></a>
+        </li>
+        <li class='nav-item'>
+            <a class='nav-link' href='" + Url.Action("About", "Home") + @"'>About</a>
+        </li>
 
 
-                ";
+        ";
     ViewBag.nav = new HtmlString(n);
-                 
-                 
+
+
     HtmlString validate = new HtmlString("");
 
     SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
@@ -35,18 +35,18 @@
     {
         query = new SqlCommand("SELECT * from Tasks where usr=@un AND (name LIKE @nm OR [desc] LIKE @nm)", connect);
         query.Parameters.AddWithValue("@un", HttpContext.Current.Session["Username"].ToString());
-        query.Parameters.AddWithValue("@nm", "%"+Request.QueryString["search"]+"%");
+        query.Parameters.AddWithValue("@nm", "%" + Request.QueryString["search"] + "%");
     }
     //SqlCommand tasks = new SqlCommand(query, connect);
 
     SqlDataReader rdr = query.ExecuteReader();
 }
 <div class="indent1">
-	<h1>Welcome @HttpContext.Current.Session["Username"]!</h1><br />
+    <h1>Welcome @HttpContext.Current.Session["Username"]!</h1><br />
     <form action="@Url.Action("Index", "Home")">
         <input type="text" name="search" placeholder="Search" class="form-control" style="display:inline-block" value="@Request.QueryString["search"]" /><input class="btn btn-primary" type="submit" value="Go" style="display:inline-block;margin-top:-5px" />
     </form><br />
-	<div id="tasks" class="inlinetbl" style="padding-right: 10px;">
+    <div id="tasks" class="inlinetbl" style="padding-right: 10px;">
         <h4>All Tasks</h4>
         <table border="1" cellpadding="10" cellspacing="0" style="border-collapse:separate;width: 650px">
             <tbody>
@@ -70,7 +70,7 @@
             }
             </tbody>
         </table>
-	</div>
+    </div>
     @{
         rdr.Close();
 
@@ -103,33 +103,33 @@
                 </tr>
             }
             </tbody>
-        </table> 
+        </table>
         @if (!rdr.HasRows)
         {
             <div style="text-align:center;width: 650px;padding-top:4px;">No tasks within the next 3 days!</div>
         }
     </div><div style="clear:both;"></div>
     <br />
-	<h2>Add new</h2>
+    <h2>Add new</h2>
     <form method="post" action="@Url.Action("AddTask", "Home")">
-            @ViewBag.validate
-            <div class="form-group col-sm-2">
-                <label for="tn">Name:</label>
-                <input id="tn" type="text" name="addname" class="form-control fcwide" required />
-            </div>
+        @ViewBag.validate
+        <div class="form-group col-sm-2">
+            <label for="tn">Name:</label>
+            <input id="tn" type="text" name="addname" class="form-control fcwide" required />
+        </div>
 
-            <div class="form-group col-sm-2">
-                <label for="tds">Desc:</label>
-                <textarea rows="7" id="tds" name="adddesc" class="form-control fcwide" required ></textarea>
-            </div>
-            <div class="form-group col-sm-2">
-                <label for="tda">Date:</label>
-                <input id="tda" type="date" name="adddate" class="form-control fcwide" required />
-            </div>
+        <div class="form-group col-sm-2">
+            <label for="tds">Desc:</label>
+            <textarea rows="7" id="tds" name="adddesc" class="form-control fcwide" required></textarea>
+        </div>
+        <div class="form-group col-sm-2">
+            <label for="tda">Date:</label>
+            <input id="tda" type="date" name="adddate" class="form-control fcwide" required />
+        </div>
 
-            <input class="btn btn-primary" type="submit" name="add" value="Add" />
-</form>
+        <input class="btn btn-primary" type="submit" name="add" value="Add" />
+    </form>
 </div>
 @{
-	connect.Close();
+    connect.Close();
 }

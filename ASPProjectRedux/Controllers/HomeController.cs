@@ -1,19 +1,19 @@
-﻿    using System;
+﻿using ASPProjectRedux.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
-using ASPProjectRedux.Models;
-using System.Text.RegularExpressions;
 
 namespace ASPProject.Contollers
 {
     public class HomeController : Controller
     {
         private LoginEntities db = new LoginEntities();
-        
+
         // GET: Home
         public ActionResult Index()
         {
@@ -48,7 +48,7 @@ namespace ASPProject.Contollers
                 return RedirectToAction("Login", "Home");
             }
             HttpContext.Session.Remove("Username");
-            return RedirectToAction("Login", "Home", new { signout=1 });
+            return RedirectToAction("Login", "Home", new { signout = 1 });
 
         }
 
@@ -99,7 +99,7 @@ namespace ASPProject.Contollers
             return RedirectToAction("Login", "Home");
         }
 
-     
+
 
         public ActionResult Signup()
         {
@@ -138,7 +138,7 @@ namespace ASPProject.Contollers
                 INSERT.ExecuteNonQuery();
                 //Response.Write("Insert Sucessful!");
             }
-            return RedirectToAction("Login", "Home", new { signup=1 });
+            return RedirectToAction("Login", "Home", new { signup = 1 });
         }
 
         public ActionResult Delete()
@@ -147,7 +147,7 @@ namespace ASPProject.Contollers
             {
                 return RedirectToAction("Login", "Home");
             }
-            if(Request.QueryString["id"] != null)
+            if (Request.QueryString["id"] != null)
             {
                 SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ConnectionString);
                 connect.Open();
@@ -242,7 +242,8 @@ namespace ASPProject.Contollers
             }
             string usern = (string)HttpContext.Session["Username"];
             Task t = db.Tasks.First(x => x.usr == usern && x.Id == id.Value);
-            if(t != null) {
+            if (t != null)
+            {
                 ViewBag.tname = t.name;
                 ViewBag.tdesc = t.desc;
                 ViewBag.tdate = t.date.ToString("yyyy-MM-dd");
