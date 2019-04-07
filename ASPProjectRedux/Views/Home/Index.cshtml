@@ -97,30 +97,22 @@
     <br />
 	<h2>Add new</h2>
     <form method="post" action="@Url.Action("AddTask", "Home")">
-        @ViewBag.validate
-    <table>
-        <tr>
-            <td><label>Name:</label>&nbsp;</td>
-            <td><input type="text" name="addname" /></td>
-        </tr>
-        <tr>
-            <td>
-                <label>Desc:</label>
-            </td>
-            <td>
-                <input type="text" name="adddesc" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Date:</label>
-            </td>
-            <td>
-                <input type="date" name="adddate" />
-            </td>
-        </tr>
-    </table><br />
-        <input class="btn btn-primary" type="submit" name="add" value="Add" />
+            @ViewBag.validate
+            <div class="form-group col-sm-2">
+                <label for="tn">Name:</label>
+                <input id="tn" type="text" name="addname" class="form-control fcwide" required />
+            </div>
+
+            <div class="form-group col-sm-2">
+                <label for="tds">Desc:</label>
+                <textarea rows="7" id="tds" name="adddesc" class="form-control fcwide" required ></textarea>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="tda">Date:</label>
+                <input id="tda" type="date" name="adddate" class="form-control fcwide" required />
+            </div>
+
+            <input class="btn btn-primary" type="submit" name="add" value="Add" />
 </form>
 </div>
 @{

@@ -37,18 +37,18 @@
     </p>
     <div class="form-group col-sm-2">
         <label for="UserName">Username</label>
-        <input name="UserName" type="text" class="form-control" required placeholder="Enter Username">
+        <input id="UserName" name="UserName" type="text" class="form-control" required placeholder="Enter Username">
     </div>
     <div class="form-group col-sm-2">
         <label for="Password">Password</label>
-        <input name="Password" type="text" class="form-control" required placeholder="Enter Password">
+        <input id="Password" name="Password" type="password" class="form-control" required placeholder="Enter Password">
     </div>
     <br />
     <div class="form-row">
         <div class="form-group">
             <input class="btn btn-primary" name="Login" type="submit" value="Login" />
             &nbsp;&nbsp;
-            <input class="btn btn-secondary" name="Signup" type="submit" value="Signup" />
+            <input class="btn btn-secondary" name="Signup" type="submit" value="Signup" formnovalidate />
         </div>
     </div>
 </form>
